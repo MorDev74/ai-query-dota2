@@ -1,21 +1,32 @@
 "use client"
 
-import React,{useState} from "react";
-export function RadioGroup({
-    optionList,
-}: {
-    optionList: { value: string, enabled: boolean }[],
-}) {
-    const [selectedOption, setSelectedOption] = useState(optionList[0].value);
+import React from "react";
 
-    function handleOptionChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setSelectedOption(e.target.value);
+type Props = {
+    value: string, key:string, enabled: boolean
+};
+export function RadioGroup({
+    category, 
+    setCategory,
+    categoryList,
+}: {
+    category: Props, 
+    setCategory:React.Dispatch<React.SetStateAction<Props>>,
+    categoryList: Props[],
+}) {
+    function handleCategoryChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const value:string  = e.target.value;
+
+        const selectedItem = categoryList.find(item => item.value === value);
+        if (selectedItem) {
+            setCategory(selectedItem);
+        }
     }
 
     return (
         <div className="flex flex-row justify-center">
             <div className="relative flex flex-row gap-1">
-                {optionList.map((optionInfo, index) => (
+                {categoryList.map((categoryInfo, index) => (
                     <div
                         key={index}
                         className={`-skew-x-12`}
@@ -24,30 +35,30 @@ export function RadioGroup({
                         <input
                             key={`input-${index}`}
                             type="radio"
-                            id={`${optionInfo.value}-${index}`}
+                            id={`${categoryInfo.value}-${index}`}
                             name="options"
-                            value={optionInfo.value}
-                            onChange={handleOptionChange}
-                            disabled={!optionInfo.enabled}
-                            checked={selectedOption === optionInfo.value}
+                            value={categoryInfo.value}
+                            onChange={handleCategoryChange}
+                            disabled={!categoryInfo.enabled}
+                            checked={category.value === categoryInfo.value}
                             className="appearance-none"
                         />
 
                         <label
                             key={`label-${index}`}
-                            htmlFor={`${optionInfo.value}-${index}`}
+                            htmlFor={`${categoryInfo.value}-${index}`}
                             className={`border border-gray-300 px-4 py-2 cursor-pointer
                                 transition-all duration-500 ease-in-out
                                 font-bold text-xl
                                 text-white
-                                ${optionInfo.enabled
-                                ? selectedOption === optionInfo.value
+                                ${categoryInfo.enabled
+                                ? category.value === categoryInfo.value
                                                     ? "bg-gradient-to-b from-red-600 to-red-900"
                                                     : "bg-gray-900"
                                 : "bg-gray-700"
                                 }
                             `}
-                        >{optionInfo.value}</label>
+                        >{categoryInfo.value}</label>
 
                     </div>
                 ))}

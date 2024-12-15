@@ -24,8 +24,10 @@ export function ComboMenu({selectValue, setSelectValue, list}
                 {list.map((item,index) => (
                     <option
                         key={index}
-                        className="bg-black 
-                            hover:bg-blue-700"
+                        className="
+                            text-white
+                            bg-red-900 
+                        "
                         value={item}
                     >
                         {item}

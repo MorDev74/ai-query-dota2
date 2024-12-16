@@ -1,3 +1,6 @@
+## Demo
+- https://ai-query-dota2.vercel.app/
+
 ## Stack
 - Next.js – framework
 - OpenRouter - AI API provider

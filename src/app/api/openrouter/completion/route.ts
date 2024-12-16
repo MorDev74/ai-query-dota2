@@ -39,6 +39,7 @@ async function generateQuery(question: string, modelName: string, category: stri
 
     } catch (error) {
         // throw new Error(`Error generating query: ${error}`);
+        void error;
         return "error";
     }
 }
@@ -64,6 +65,7 @@ async function runQuery(query: string) {
 
     if (error) {
         // throw new Error(`Error running query: ${error}`);
+        void error;
         return [];
     }
 

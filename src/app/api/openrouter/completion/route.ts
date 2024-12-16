@@ -38,7 +38,8 @@ async function generateQuery(question: string, modelName: string, category: stri
         return result.object.query;
 
     } catch (error) {
-        throw new Error(`Error generating query: ${error}`);
+        // throw new Error(`Error generating query: ${error}`);
+        return "error";
     }
 }
 
@@ -55,13 +56,15 @@ async function runQuery(query: string) {
         query.trim().toLowerCase().includes("grant") ||
         query.trim().toLowerCase().includes("revoke")
     ) {
-        throw new Error("Only SELECT queries are allowed");
+        // throw new Error("Only SELECT queries are allowed");
+        return [];
     }
 
     const { data, error } = await supabaseClient.rpc('execute_read_only_sql', { query });
 
     if (error) {
-        throw new Error(`Error running query: ${error}`);
+        // throw new Error(`Error running query: ${error}`);
+        return [];
     }
 
     return data as Result[];
@@ -84,6 +87,11 @@ export async function POST(req: Request): Promise<Response> {
     }
 
     const query = await generateQuery(question, modelName, category);
+    if (query === "error") {
+        return new Response(JSON.stringify({ result: "Error generating query"}), {
+            headers: { "Content-Type": "application/json" },
+        });
+    }
 
     const data = await runQuery(query);
 

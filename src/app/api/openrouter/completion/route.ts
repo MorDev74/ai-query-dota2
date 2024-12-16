@@ -7,8 +7,7 @@ import { Result } from "@/utils/types"
 
 export const maxDuration = 30;
 
-// const apiKey = process.env["OPENROUTER_API_KEY_QUERY_DOTA2"];
-const apiKey = "OPENROUTER_API_KEY_QUERY_DOTA2";
+const apiKey = process.env["OPENROUTER_API_KEY_QUERY_DOTA2"];
 
 
 async function getOpenRouterClient() {

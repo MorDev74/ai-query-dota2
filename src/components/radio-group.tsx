@@ -6,10 +6,12 @@ type Props = {
     value: string, key:string, enabled: boolean
 };
 export function RadioGroup({
+    isProcessing,
     category, 
     setCategory,
     categoryList,
 }: {
+    isProcessing: boolean,
     category: Props, 
     setCategory:React.Dispatch<React.SetStateAction<Props>>,
     categoryList: Props[],
@@ -31,7 +33,6 @@ export function RadioGroup({
                         key={index}
                         className={`-skew-x-12`}
                     >
-
                         <input
                             key={`input-${index}`}
                             type="radio"

@@ -1,20 +1,28 @@
 "use client"
 
-import Image from "next/image";
-import { URL_IMAGE_HERO } from "@/utils/config"
+import { Result } from "@/utils/types";
+import { HeroCard } from "./hero-card";
 
-export function QueryResult() {
-  const heroName = "tiny";
+export function QueryResult({
+  question,
+  results
+}:{
+  question: string;
+  results: Result[];
+}) {
   return (
-    <div className="border">
-      Query Result
-      <Image
-        src={`${URL_IMAGE_HERO}${heroName}.png`}
-        alt="hero"
-        width={200}
-        height={112}
-      >
-      </Image>
+    <div className={`flex flex-col mx-auto
+        sm:max-w-[700px] lg:max-w-[700px] 2xl:max-w-[1000px]
+    `}>
+      {question && <div className="border border-gray-600 p-2 rounded-md text-2xl font-bold">
+        {`Question:  ${question}`}
+      </div>}
+
+      <div className={`overflow-y-auto flex flex-wrap gap-2 rounded-md`}>
+        {results.map((result,index) => (
+          <HeroCard key={index} result={result} />
+        ))}
+      </div>
     </div>
   );
 }

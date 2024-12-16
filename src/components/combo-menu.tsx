@@ -2,8 +2,17 @@
 
 import React from "react";
 
-export function ComboMenu({selectValue, setSelectValue, list}
-        :{selectValue:string, setSelectValue: React.Dispatch<React.SetStateAction<string>>, list:string[]}) {
+export function ComboMenu({
+    isProcessing,
+    selectValue, 
+    setSelectValue, 
+    list
+}:{
+    isProcessing: boolean,
+    selectValue:string, 
+    setSelectValue: React.Dispatch<React.SetStateAction<string>>, 
+    list:string[]}
+) {
 
     function onSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
         e.preventDefault();
@@ -12,7 +21,7 @@ export function ComboMenu({selectValue, setSelectValue, list}
 
     return (
         <div className="flex flex-row gap-2 items-center">
-            <div className="font-bold">LLM</div>
+            <div className="font-bold">LLM Model</div>
 
             <select 
                 value={selectValue || ""}
@@ -24,6 +33,7 @@ export function ComboMenu({selectValue, setSelectValue, list}
                 {list.map((item,index) => (
                     <option
                         key={index}
+                        disabled={isProcessing}
                         className="
                             text-white
                             bg-red-900 

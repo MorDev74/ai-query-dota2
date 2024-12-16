@@ -1,6 +1,12 @@
 "use client"
 
-export function SearchBox({ handleSubmit }: { handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void }) {
+export function SearchBox({ 
+    isProcessing,
+    handleSubmit 
+}: { 
+    isProcessing: boolean,
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void }
+) {
     return (
         <form
             onSubmit={handleSubmit}
@@ -10,6 +16,7 @@ export function SearchBox({ handleSubmit }: { handleSubmit: (e: React.FormEvent<
         >
             <input
                 type="text"
+                disabled={isProcessing}
                 name="question"
                 placeholder="Search"
                 className="
@@ -25,6 +32,7 @@ export function SearchBox({ handleSubmit }: { handleSubmit: (e: React.FormEvent<
             />
             <button
                 type="submit"
+                disabled={isProcessing}
                 className="p-2 rounded-md 
                     bg-gradient-to-b from-red-600 to-red-900
                 "

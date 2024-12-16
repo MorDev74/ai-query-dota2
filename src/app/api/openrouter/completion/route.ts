@@ -1,7 +1,9 @@
 import { generateObject  } from "ai";
 import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import { z } from "zod";
-import { systemMessageHero } from "@/utils/config";
+import { categoryKeys,systemMessageHero } from "@/utils/config";
+import { supabaseClient } from "@/utils/supabase";
+import { Result } from "@/utils/types"
 
 export const maxDuration = 30;
 
@@ -40,25 +42,52 @@ async function generateQuery(question: string, modelName: string, category: stri
     }
 }
 
+async function runQuery(query: string) {
+    if (
+        !query.trim().toLowerCase().startsWith("select") ||
+        query.trim().toLowerCase().includes("drop") ||
+        query.trim().toLowerCase().includes("delete") ||
+        query.trim().toLowerCase().includes("insert") ||
+        query.trim().toLowerCase().includes("update") ||
+        query.trim().toLowerCase().includes("alter") ||
+        query.trim().toLowerCase().includes("truncate") ||
+        query.trim().toLowerCase().includes("create") ||
+        query.trim().toLowerCase().includes("grant") ||
+        query.trim().toLowerCase().includes("revoke")
+    ) {
+        throw new Error("Only SELECT queries are allowed");
+    }
+
+    const { data, error } = await supabaseClient.rpc('execute_read_only_sql', { query });
+
+    if (error) {
+        throw new Error(`Error running query: ${error}`);
+    }
+
+    return data as Result[];
+}
+
 export async function POST(req: Request): Promise<Response> {
     const {question, modelName, category} = await req.json();
 
-    if (category !== "hero" 
-        || category !== "item" 
-        || category !== "ability" 
-        || category !== "patch_note") {
+    if ( question === undefined 
+        || modelName === undefined
+        || category === undefined
+    ) {
+        return new Response("Missing required parameters", { status: 400 });
+    }
+
+    if (categoryKeys.indexOf(category) === -1) {
         return new Response(JSON.stringify({ result: "Cateogory not supported"}), {
             headers: { "Content-Type": "application/json" },
         });
     }
 
-    if ( question === undefined || modelName  === undefined) {
-        return new Response("Missing required parameters", { status: 400 });
-    }
-
     const query = await generateQuery(question, modelName, category);
 
-    return new Response(JSON.stringify({ result: query }), {
+    const data = await runQuery(query);
+
+    return new Response(JSON.stringify({ result: data }), {
         headers: { "Content-Type": "application/json" },
     });
 }

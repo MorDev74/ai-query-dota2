@@ -1,7 +1,13 @@
 import { questionExampleHero,questionExampleItem,questionExampleAbility,questionExamplePatchNote } from "@/utils/config"; 
-export function QuestionExample({ category, handleClick }: { category: string; handleClick: (question:string) => void  }) {
-    console.log(category)
-
+export function QuestionExample({ 
+    isProcessing,
+    category, 
+    handleClick 
+}: { 
+    isProcessing: boolean,
+    category: string; 
+    handleClick: (question:string) => void
+}) {
     let exampleList:string[] = [];
     if (category === "hero") {
         exampleList = questionExampleHero;
@@ -26,10 +32,12 @@ export function QuestionExample({ category, handleClick }: { category: string; h
             {exampleList.map((item, index) => (
                 <button
                     key={index}
-                    className="border border-white text-white p-2 rounded-md
+                    disabled={isProcessing}
+                    className="border border-gray-500 text-white p-2 rounded-md
                         transition-all duration-500 ease-in-out
                         bg-slate-900
                         hover:bg-slate-600
+                        disabled:bg-slate-600
                     "
                     onClick={() => handleClick(item)}
                 >

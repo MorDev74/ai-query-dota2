@@ -26,6 +26,10 @@ export const llmList = [
     "openai/gpt-4o",
 ];
 
+export const categoryKeys = [
+    "hero", "item", "ability", "patch_note",
+];
+
 export const categoryList = [
     { value: "Hero", key:"hero", enabled: true, },
     { value: "Item", key:"item", enabled: false, },
@@ -65,6 +69,8 @@ export const systemMessageHero = `You are a SQL (postgres) and data visualizatio
     );
 
     Only retrieval queries are allowed.
+
+    Additional select column(s): id, name, name_loc.
 `;
 
 export const systemMessageItem= `You are a SQL (postgres) and data visualization expert. Your job is to help the user write a SQL query to retrieve the data they need. The table schema is as follows:
@@ -99,17 +105,18 @@ export const systemMessagePatchNote= `You are a SQL (postgres) and data visualiz
 
 export const questionExampleHero = [
     "Which hero has the highest base strength?",
-    "Which hero has the highest strength gain?",
+    "Top 5 heroes by strength gain.",
     "Which hero has the highest armor?",
     "Which hero has the highest movement speed?",
     "Which hero has the highest turn rate?",
     "Which hero has the highest projectile speed?",
     "Which hero has the highest attack rate?",
-    "Which hero has the highest attach range?",
+    "Which hero has the highest attack range?",
 ];
 
 export const questionExampleItem = [
-    "Which item has the highest gold cost?",
+    "Which item has the highest money cost?",
+    "Top 5 items by mana cost.",
 ];
 
 export const questionExampleAbility = [

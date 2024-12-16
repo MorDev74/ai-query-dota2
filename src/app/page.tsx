@@ -7,13 +7,19 @@ import { SearchBox } from "@/components/search-box";
 import { QuestionExample } from "@/components/question-example";
 import { QueryResult } from "@/components/query-result";
 import { categoryList, llmList } from "@/utils/config";
+import { Result } from "@/utils/types"
 
 export default function Home() {
 
   const [modelName, setModelName] = useState(llmList[0]);
   const [category, setCategory] = useState<{ value: string, key: string, enabled: boolean }>(categoryList[0]);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [results, setResults] = useState<Result[]>([]);
+  const [question, setQuestion] = useState("");
 
-  async function runQuery(question: string) {
+  async function queryDota2(question: string) {
+    setQuestion(question);
+    setIsProcessing(true);
     const response = await fetch("/api/openrouter/completion", {
       method: "POST",
       body: JSON.stringify({
@@ -23,15 +29,19 @@ export default function Home() {
       }),
     });
 
-    response.json().then(data => console.log(data));
+    const data = await response.json();
+    const rows = data.result;
+
+    setResults(rows);
+
+    setIsProcessing(false);
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const question = formData.get("question") as string;
-
-    runQuery(question);
+    queryDota2(question);
   }
 
   return (
@@ -39,16 +49,16 @@ export default function Home() {
 
       <div className="flex flex-row gap-4 justify-between">
         <div className="text-2xl font-bold">AI Query Dota2</div>
-        <ComboMenu selectValue={modelName} setSelectValue={setModelName} list={llmList} />
+        <ComboMenu isProcessing={isProcessing} selectValue={modelName} setSelectValue={setModelName} list={llmList} />
       </div>
 
-      <RadioGroup category={category} setCategory={setCategory} categoryList={categoryList} />
+      <RadioGroup isProcessing={isProcessing} category={category} setCategory={setCategory} categoryList={categoryList} />
 
-      <SearchBox handleSubmit={handleSubmit} />
+      <SearchBox isProcessing={isProcessing} handleSubmit={handleSubmit} />
 
-      <QuestionExample category={category.key} handleClick={runQuery}/>
+      <QuestionExample isProcessing={isProcessing} category={category.key} handleClick={queryDota2} />
 
-      <QueryResult />
+      <QueryResult question={question} results={results}/>
 
     </div>
   );

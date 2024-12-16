@@ -1,6 +1,10 @@
 ## Stack
+- Next.js – framework
+- OpenRouter - AI API provider
+- Vercel AI SDK – AI streaming library
+- Vercel – deployments
+- TailwindCSS – styles
 - Trigger.dev
-- OpenRouter
 
 ## Ref
 - Guide: https://sdk.vercel.ai/docs/guides/natural-language-postgres

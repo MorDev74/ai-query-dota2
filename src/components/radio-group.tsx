@@ -40,7 +40,7 @@ export function RadioGroup({
                             name="options"
                             value={categoryInfo.value}
                             onChange={handleCategoryChange}
-                            disabled={!categoryInfo.enabled}
+                            disabled={!categoryInfo.enabled || isProcessing}
                             checked={category.value === categoryInfo.value}
                             className="appearance-none"
                         />

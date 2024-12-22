@@ -35,7 +35,7 @@ export function QuestionExample({
                     disabled={isProcessing}
                     className="border border-gray-500 text-white p-2 rounded-md
                         transition-all duration-500 ease-in-out
-                        bg-slate-900
+                        bg-gradient-to-r from-slate-900 to-slate-700
                         hover:bg-slate-600
                         disabled:bg-slate-600
                     "

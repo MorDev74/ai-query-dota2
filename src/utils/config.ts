@@ -20,6 +20,16 @@ export const URL_ABILITY_LIST="https://www.dota2.com/datafeed/abilitylist?langua
 export const URL_ABILITY="https://www.dota2.com/datafeed/abilitydata?language=English&ability_id="
 export const FILE_ABILITY_LIST="ability_list.json"
 
+// dota2 setting
+export const primaryAttributeMap = {
+    0: "Strength", 1: "Agility", 2: "Intelligence", 3: "Universal"
+};
+// carry,support,nuker,disabler,durable,escape,pusher,initiator
+export const roleLevelMap = {
+    0:"Carry",1:"Support",2:"Nuker",3:"Disabler",4:"Durable",5:"Escape",6:"Pusher",7:"Initiator",8:""
+};
+// dota2 setting
+
 
 export const llmList = [
     "openai/gpt-4o-2024-11-20",

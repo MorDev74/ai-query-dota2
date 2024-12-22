@@ -1,7 +1,7 @@
 "use client"
 
 import { Result } from "@/utils/types";
-import { HeroCard } from "./hero-card";
+import { HeroCard } from "./HeroCard";
 
 export function QueryResult({
   question,

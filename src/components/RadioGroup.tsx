@@ -54,7 +54,7 @@ export function RadioGroup({
                                 text-white
                                 ${categoryInfo.enabled
                                 ? category.value === categoryInfo.value
-                                                    ? "bg-gradient-to-b from-red-600 to-red-900"
+                                                    ? "bg-gradient-to-b from-red-900 to-red-700" 
                                                     : "bg-gray-900"
                                 : "bg-gray-700"
                                 }

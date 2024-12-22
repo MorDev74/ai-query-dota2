@@ -35,6 +35,7 @@ async function generateQuery(question: string, modelName: string, category: stri
             schema: z.object({
                 query: z.string(),
             }),
+            temperature: 0,
         });
         return result.object.query;
 

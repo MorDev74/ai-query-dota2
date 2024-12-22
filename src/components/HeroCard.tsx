@@ -4,15 +4,29 @@ import { URL_IMAGE_HERO } from "@/utils/config"
 
 export function HeroCard({result}:{result: Result}) {
 
-    const { name, name_loc } = result;
+    const { name, name_loc, primary_attr } = result;
     const heroName = (name as string).replace("npc_dota_hero_", "");
+    console.log(`pri attr: ${primary_attr}`)
+
+    // const primaryAttribute = primaryAttributeMap[0]
+    let primaryAttribute = "";
+    if (primary_attr === 0) {
+        primaryAttribute = "bg-PrimaryAttributeStrength";
+    } else if (primary_attr === 1) {
+        primaryAttribute = "bg-PrimaryAttributeAgility";
+    } else if (primary_attr === 2) {
+        primaryAttribute = "bg-PrimaryAttributeIntelligence";
+    } else if (primary_attr === 3) {
+        primaryAttribute = "bg-PrimaryAttributeUniversal";
+    }
 
     return (
         <div
-            className="border rounded-md p-2 m-2
+            className={`border rounded-md p-2 m-2
                 flex-col gap-1
                 border-gray-500
-            "
+                ${primaryAttribute}
+            `}
         >
             <div className="font-bold">{name_loc}</div>
 

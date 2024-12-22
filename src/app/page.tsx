@@ -1,11 +1,11 @@
 "use client"
 
 import React, { useState } from "react";
-import { ComboMenu } from "@/components/combo-menu";
-import { RadioGroup } from "@/components/radio-group";
-import { SearchBox } from "@/components/search-box";
-import { QuestionExample } from "@/components/question-example";
-import { QueryResult } from "@/components/query-result";
+import { ComboMenu } from "@/components/ComboMenu";
+import { RadioGroup } from "@/components/RadioGroup";
+import { SearchBox } from "@/components/SearchBox";
+import { QuestionExample } from "@/components/QuestionExample";
+import { QueryResult } from "@/components/QueryResult";
 import { categoryList, llmList } from "@/utils/config";
 import { Result } from "@/utils/types"
 
@@ -17,9 +17,26 @@ export default function Home() {
   const [results, setResults] = useState<Result[]>([]);
   const [question, setQuestion] = useState("");
 
+  // async function handleEmbedding() {
+  //   const response = await fetch("/api/dashscope/embedding", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       input: "Which hero has the hightest base strength?",
+  //     }),
+  //   });
+
+  //   const result = await response.json();
+  //   // result.messsage: data/id/model/object/usage
+  //   console.log(result.message.data);
+  // }
+
   async function queryDota2(question: string) {
     setQuestion(question);
     setIsProcessing(true);
+
     const response = await fetch("/api/openrouter/completion", {
       method: "POST",
       body: JSON.stringify({
@@ -33,7 +50,6 @@ export default function Home() {
     const rows = data.result;
 
     setResults(rows);
-
     setIsProcessing(false);
   }
 
@@ -58,7 +74,7 @@ export default function Home() {
 
       <QuestionExample isProcessing={isProcessing} category={category.key} handleClick={queryDota2} />
 
-      <QueryResult question={question} results={results}/>
+      <QueryResult question={question} results={results} />
 
     </div>
   );

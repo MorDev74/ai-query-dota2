@@ -27,7 +27,7 @@ export function ComboMenu({
                 value={selectValue || ""}
                 onChange={onSelectChange}
                 className="rounded-md p-2
-                    bg-gradient-to-b from-red-600 to-red-900
+                    bg-gradient-to-b from-red-900 to-red-700
                 "
             >
                 {list.map((item,index) => (

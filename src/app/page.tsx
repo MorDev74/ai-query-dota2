@@ -7,7 +7,8 @@ import { SearchBox } from "@/components/SearchBox";
 import { QuestionExample } from "@/components/QuestionExample";
 import { QueryResult } from "@/components/QueryResult";
 import { categoryList, llmList } from "@/utils/config";
-import { Result } from "@/utils/types"
+import { Result } from "@/utils/types";
+import DevPanel from "@/components/DevPanel";
 
 export default function Home() {
 
@@ -30,7 +31,9 @@ export default function Home() {
 
   //   const result = await response.json();
   //   // result.messsage: data/id/model/object/usage
-  //   console.log(result.message.data);
+  //   const embedding = result.message.data[0].embedding;
+  //   console.log(embedding);
+  //   console.log(embedding.length);
   // }
 
   async function queryDota2(question: string) {
@@ -61,12 +64,16 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col gap-4 m-4">
+    <div className="flex flex-col gap-4 m-4 h-full">
 
       <div className="flex flex-row gap-4 justify-between">
         <div className="text-2xl font-bold">AI Query Dota2</div>
+        {/* <button onClick={handleEmbedding}>
+          Embedding
+        </button> */}
         <ComboMenu isProcessing={isProcessing} selectValue={modelName} setSelectValue={setModelName} list={llmList} />
       </div>
+
 
       <RadioGroup isProcessing={isProcessing} category={category} setCategory={setCategory} categoryList={categoryList} />
 
@@ -75,6 +82,8 @@ export default function Home() {
       <QuestionExample isProcessing={isProcessing} category={category.key} handleClick={queryDota2} />
 
       <QueryResult question={question} results={results} />
+
+      <DevPanel />
 
     </div>
   );

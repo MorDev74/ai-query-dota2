@@ -40,7 +40,6 @@ async function generateQuery(question: string, modelName: string, category: stri
         return result.object.query;
 
     } catch (error) {
-        // throw new Error(`Error generating query: ${error}`);
         void error;
         return "error";
     }

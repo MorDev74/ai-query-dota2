@@ -4,21 +4,17 @@ export const URL_IMAGE_ITEM="https://cdn.akamai.steamstatic.com/apps/dota2/image
 export const URL_IMAGE_UNIT="https://cdn.akamai.steamstatic.com/apps/dota2/images/dota_react/units/"
 export const URL_IMAGE_ICON="https://cdn.akamai.steamstatic.com/apps/dota2/images/dota_react/icons/"
 
-export const URL_PATCH_NOTES="https://www.dota2.com/datafeed/patchnoteslist?language=English"
-export const URL_PATCH_NOTE="https://www.dota2.com/datafeed/patchnotes?language=English&version="
-export const FILE_PATCH_NOTES="patch_notes.json"
+export const URL_PATCH_NOTES_BASE="https://www.dota2.com/datafeed/patchnoteslist"
+export const URL_PATCH_NOTE_BASE="https://www.dota2.com/datafeed/patchnotes"
 
-export const URL_ITEMS="https://www.dota2.com/datafeed/itemlist?language=English"
-export const URL_ITEM="https://www.dota2.com/datafeed/itemdata?language=english&item_id="
-export const FILE_ITEMS="items.json"
+export const URL_ABILITY_LIST_BASE="https://www.dota2.com/datafeed/abilitylist"
+export const URL_ABILITY_BASE="https://www.dota2.com/datafeed/abilitydata"
 
-export const URL_HEROES="https://www.dota2.com/datafeed/herolist?language=English"
-export const URL_HERO="https://www.dota2.com/datafeed/herodata?language=english&hero_id="
-export const FILE_HEROES="heroes.json"
+export const URL_ITEMS_BASE="https://www.dota2.com/datafeed/itemlist"
+export const URL_ITEM_BASE="https://www.dota2.com/datafeed/itemdata"
 
-export const URL_ABILITY_LIST="https://www.dota2.com/datafeed/abilitylist?language=english"
-export const URL_ABILITY="https://www.dota2.com/datafeed/abilitydata?language=English&ability_id="
-export const FILE_ABILITY_LIST="ability_list.json"
+export const URL_HEROES_BASE="https://www.dota2.com/datafeed/herolist"
+export const URL_HERO_BASE="https://www.dota2.com/datafeed/herodata"
 
 // dota2 setting
 export const primaryAttributeMap = {

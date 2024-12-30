@@ -16,7 +16,8 @@ type ApiResponse = {
 
 type SaveFileData = ApiResponse | Record<string, unknown>;
 
-const CURRENT_PATCH = '7.36';
+const CURRENT_PATCH = '7.37e';
+console.log(`patch version: ${CURRENT_PATCH}`);
 
 const saveToFile = async (filename: string, data: SaveFileData) => {
   try {
@@ -158,6 +159,42 @@ export default function DevPanel() {
     savePatchNotesToDB: async () => {
       const response = await fetch('/api/database/patch-notes', {
         method: 'GET'
+      });
+      return response.json();
+    },
+    saveHeroesToDB: async () => {
+      const response = await fetch('/api/database/heroes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          patch_version: CURRENT_PATCH 
+        })
+      });
+      return response.json();
+    },
+    saveAbilitiesToDB: async () => {
+      const response = await fetch('/api/database/abilities', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          patch_version: CURRENT_PATCH 
+        })
+      });
+      return response.json();
+    },
+    saveItemsToDB: async () => {
+      const response = await fetch('/api/database/items', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          patch_version: CURRENT_PATCH 
+        })
       });
       return response.json();
     },

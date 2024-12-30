@@ -15,4 +15,4 @@
     - https://trigger.dev/docs/guides/frameworks/nextjs
 - Dota2
     - Patch
-        - https://www.dota2.com/patches/7.37e
+        - https://www.dota2.com/patches/7.37

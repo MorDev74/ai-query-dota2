@@ -54,7 +54,7 @@ export async function GET() {
       // Insert new patch into Supabase
       console.log("insert");
       const { error: insertError } = await supabaseClient
-        .from('dota2_patch_notes')
+        .from('dota2_patch_note_list')
         .insert({
           patch_number: patch.patch_number,
           patch_name: patch.patch_name,

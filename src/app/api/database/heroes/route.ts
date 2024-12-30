@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     const listUrl = URL_HEROES_BASE;
     const params = new URLSearchParams({
       language: 'english',
-      patch_version: patch_version
+      version: patch_version
     });
     
     const heroesResponse = await fetch(`${listUrl}?${params}`);
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
       // Fetch detailed hero data
       const detailParams = new URLSearchParams({
         language: 'english',
-        patch_version: patch_version,
+        version: patch_version,
         hero_id: heroBasic.id.toString()
       });
 

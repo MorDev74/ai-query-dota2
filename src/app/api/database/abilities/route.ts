@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     const listUrl = URL_ABILITY_LIST_BASE;
     const params = new URLSearchParams({
       language: 'english',
-      patch_version: patch_version
+      version: patch_version
     });
 
     const abilitiesResponse = await fetch(`${listUrl}?${params}`);
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
       // Fetch detailed ability data
       const detailParams = new URLSearchParams({
         language: 'english',
-        patch_version: patch_version,
+        version: patch_version,
         ability_id: abilityBasic.id.toString()
       });
 

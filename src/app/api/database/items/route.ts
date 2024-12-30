@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     const listUrl = URL_ITEMS_BASE;
     const params = new URLSearchParams({
       language: 'english',
-      patch_version: patch_version
+      version: patch_version
     });
     
     const itemsResponse = await fetch(`${listUrl}?${params}`);
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
       // Fetch detailed item data
       const detailParams = new URLSearchParams({
         language: 'english',
-        patch_version: patch_version,
+        version: patch_version,
         item_id: itemBasic.id.toString()
       });
 

@@ -198,6 +198,12 @@ export default function DevPanel() {
       });
       return response.json();
     },
+    savePatchNotesDetailToDB: async () => {
+      const response = await fetch('/api/database/patch-notes-detail', {
+        method: 'GET',
+      });
+      return response.json();
+    },
   };
 
   const handleClick = async (endpoint: keyof typeof testEndpoints) => {

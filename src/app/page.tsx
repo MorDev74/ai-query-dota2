@@ -11,6 +11,7 @@ import { Result } from "@/utils/types";
 import DevPanel from "@/components/DevPanel";
 
 export default function Home() {
+  const isDevelopment = process.env.NODE_ENV === 'development';
 
   const [modelName, setModelName] = useState(llmList[0]);
   const [category, setCategory] = useState<{ value: string, key: string, enabled: boolean }>(categoryList[0]);
@@ -83,7 +84,7 @@ export default function Home() {
 
       <QueryResult question={question} results={results} />
 
-      <DevPanel />
+      {isDevelopment && <DevPanel />}
 
     </div>
   );

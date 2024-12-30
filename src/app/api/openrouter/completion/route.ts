@@ -1,14 +1,13 @@
 import { generateObject  } from "ai";
 import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import { z } from "zod";
-import { categoryKeys,systemMessageHero } from "@/utils/config";
 import { supabaseClient } from "@/utils/supabase";
 import { Result } from "@/utils/types"
+import { categoryKeys,systemMessageHero } from "@/utils/config";
 
 export const maxDuration = 30;
 
 const apiKey = process.env["OPENROUTER_API_KEY_QUERY_DOTA2"];
-
 
 async function getOpenRouterClient() {
     const openRouterClient = createOpenRouter({

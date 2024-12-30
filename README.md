@@ -16,3 +16,5 @@
 - Dota2
     - Patch
         - https://www.dota2.com/patches/7.37
+    - Wiki
+        - https://dota2.fandom.com/wiki/Mechanics

@@ -46,6 +46,7 @@ const saveToFile = async (filename: string, data: SaveFileData) => {
 export default function DevPanel() {
   const [result, setResult] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState(false);
+  const [question, setQuestion] = useState('');
 
   const testEndpoints = {
     abilities: async () => {
@@ -222,8 +223,50 @@ export default function DevPanel() {
     }
   };
 
+  const handleAgentSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const response = await fetch('/api/agent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question }),
+      });
+      
+      const data = await response.json();
+      setResult(data);
+      await saveToFile('agent_response.json', data);
+    } catch (error) {
+      console.error('Error calling agent:', error);
+      setResult({ error: 'Failed to call agent' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="p-4 h-full">
+      <form onSubmit={handleAgentSubmit} className="mb-6">
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder="Ask a question about Dota 2..."
+            className="flex-1 px-4 py-2 border text-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            disabled={loading || !question.trim()}
+            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:bg-green-300"
+          >
+            Ask Agent
+          </button>
+        </div>
+      </form>
+
       <div className="flex flex-wrap gap-2 mb-4">
         {Object.keys(testEndpoints).map((endpoint) => (
           <button

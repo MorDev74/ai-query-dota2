@@ -1,1 +1,1 @@
-export type Result = Record<string, string | number>; // TODO: move to types
+export type Result = Record<string, unknown>;
